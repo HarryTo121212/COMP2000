@@ -31,12 +31,13 @@ public class Main extends JFrame {
             Point currentPoint = getMousePosition();
             grid.paint(g, currentPoint);
             if(currentPoint != null){
+                if(!currentPoint.equals(lastMousePoint)){
                     mouseTrail.add(currentPoint);
                     lastMousePoint = currentPoint;
                     if(mouseTrail.size() > Max_Trail){
                         mouseTrail.removeFirst();
                     }
-                
+                }
             }
 
             g.setColor(new Color(50, 255, 125, 50));
