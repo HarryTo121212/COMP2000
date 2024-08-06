@@ -1,44 +1,52 @@
 import javax.swing.*;
-import javax.swing.JPanel;
 import java.awt.*;
-import java.awt.Graphics;
-import java.awt.event.MouseMotionListener;
-import java.awt.event.MouseEvent;
-import javax.swing.plaf.DimensionUIResource;
+import java.util.LinkedList;
+import java.util.Random; 
+
 
 public class Main extends JFrame {
+    public void run(){
+        while(true){
+            this.repaint();
+        }
+    }
     public static void main(String[] args) throws Exception {
         Main window = new Main();
+        window.run();
     }
-    class Canvas extends JPanel implements MouseMotionListener{
-
-        grid grid;
-        Point point;
-
+    class Canvas extends JPanel {
+        LinkedList <Point> mouseTrail = new LinkedList<>();
+        final int Max_Trail = 100;
+        Point lastMousePoint = null;
+        
         public Canvas(){
             setPreferredSize( new Dimension(720, 720 ));
-            addMouseMotionListener(this);
         }
 
 
         @Override
         public void paint(Graphics g){
-            grid = new grid();  
-            point = getMousePosition();
-            grid.paint(g, point); 
-        }
 
-        @Override
-        public void mouseDragged(MouseEvent e) {
-            
-        }
+            grid grid = new grid();  
+            Point currentPoint = getMousePosition();
+            grid.paint(g, currentPoint);
+            if(currentPoint != null){
+                    mouseTrail.add(currentPoint);
+                    lastMousePoint = currentPoint;
+                    if(mouseTrail.size() > Max_Trail){
+                        mouseTrail.removeFirst();
+                    }
+                
+            }
 
-        @Override
-        public void mouseMoved(MouseEvent e) {
-            repaint();
+            g.setColor(new Color(50, 255, 125, 50));
+            for(Point point : mouseTrail){
+                g.fillOval(point.x - 5, point.y - 5, 10, 10);
+            }
         }
-
     }
+
+
     private Main() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Canvas canvas = new Canvas();

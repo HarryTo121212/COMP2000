@@ -7,12 +7,20 @@ import javax.swing.plaf.DimensionUIResource;
 
 
 public class grid extends JPanel {
-    public void paint(Graphics g, Point p) {
-        Cells cell;
-        for(int i=10;i<710; i+=35){
-            for(int j=10;j<710; j+=35){
-                cell = new Cells(i, j, 35);
-                cell.paint(g, cell.highlighted(p));
+    Cells[][] cell = new Cells[20][20];
+
+    public grid(){
+        for(int i = 0; i < cell.length; i++){
+            for(int j = 0; j < cell[i].length; j++){
+                cell[i][j] = new Cells(i*Cells.size + 10, j*Cells.size + 10);
+            }
+        }
+    }
+
+    public void paint(Graphics g, Point p){
+        for(int i = 0; i < cell.length; i++){
+            for(int j = 0; j < cell[i].length; j++){
+                cell[i][j].paint(g, cell[i][j].highlighted(p));
             }
         }
     }
