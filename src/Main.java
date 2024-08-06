@@ -13,7 +13,7 @@ public class Main extends JFrame {
     class Canvas extends JPanel implements MouseMotionListener{
 
         grid grid;
-        Point p;
+        Point point;
 
         public Canvas(){
             setPreferredSize( new Dimension(720, 720 ));
@@ -24,8 +24,8 @@ public class Main extends JFrame {
         @Override
         public void paint(Graphics g){
             grid = new grid();  
-            p = getMousePosition();
-            grid.paint(g, p); 
+            point = getMousePosition();
+            grid.paint(g, point); 
         }
 
         @Override
