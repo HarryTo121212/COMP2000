@@ -7,6 +7,7 @@ import java.awt.Color;
 
 public class Main extends JFrame {
   public Stage stage;
+  Grid grid = new Grid();
     public static void main(String[] args) throws Exception {
       Main window = new Main();
       window.run();
@@ -22,21 +23,19 @@ public class Main extends JFrame {
       public void paint(Graphics g) {
         super.paint(g);
         stage.paint(g, getMousePosition());
+        
       }
     }
 
     private Main() {
       this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-      Grid grid = new Grid();
-      Actor [] actors ={
-
-        new Actor(new Cell(10, 10), Color.BLUE),
-        new Actor(new Cell(10, 45), Color.YELLOW),
-        new Actor(new Cell(10, 80), Color.GREEN)
-      };
-      stage = new Stage(grid, actors);
-
       Canvas canvas = new Canvas();
+      Actor[] actors = {
+        new Cat(grid.cells[1][1]),
+        new Dog(grid.cells[2][2]),
+        new Bird(grid.cells[3][3])
+    };
+      stage = new Stage(grid, actors);
       this.setContentPane(canvas);
       this.pack();
       this.setVisible(true);

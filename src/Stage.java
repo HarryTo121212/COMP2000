@@ -12,6 +12,8 @@ public Stage(Grid grid, Actor[] actor) {
         for (int i = 0; i < actor.length; i++) {
             actor[i].paint(g);
         }
+       
+        
     }
     
 }
