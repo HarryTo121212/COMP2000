@@ -5,7 +5,6 @@ import java.awt.Rectangle;
 
 public class Cell extends Rectangle {
   // fields
-  int x;
   static int size = 35;
 
   // constructors
@@ -26,6 +25,10 @@ public class Cell extends Rectangle {
   }
 
   public boolean contains(Point p) {
-    return super.contains(p);
+    if(p != null) {
+      return super.contains(p);
+    }else {
+      return false;
+    }
   }
 }
