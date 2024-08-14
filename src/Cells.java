@@ -2,7 +2,6 @@ import javax.swing.*;
 import javax.swing.JPanel;
 import java.awt.*;
 import java.awt.Graphics;
-import javax.swing.plaf.DimensionUIResource;
 class Cells extends JPanel {
     int i;
     int j;
