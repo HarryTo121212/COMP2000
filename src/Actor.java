@@ -1,14 +1,17 @@
 import java.awt.Color;
 import java.awt.Graphics;
-
+import java.awt.Polygon;
 public abstract class Actor {
   Color color;
   Cell loc;
+  Polygon shape[] ;
 
   public void paint(Graphics g) {
+   for(Polygon shape : shape){
     g.setColor(color);
-    g.fillRect(loc.x + 5, loc.y + 5, loc.width - 10, loc.height - 10);
-    g.setColor(Color.GRAY);
-    g.drawRect(loc.x + 5, loc.y + 5, loc.width - 10, loc.height - 10);
+    g.fillPolygon(shape);
+    g.setColor(color.BLACK);
+    g.drawPolygon(shape);
+   }  
   }
 }
