@@ -10,6 +10,7 @@ public abstract class Actor {
   boolean humanPlayer;
   int moves;
   int turns;
+  Move move;
 
   protected Actor(Cell inLoc, Color inColor, Boolean isHuman, int inMoves) {
     loc = inLoc;
@@ -39,4 +40,5 @@ public abstract class Actor {
     loc = inLoc;
     setPoly();
   }
+  
 }
