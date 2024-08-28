@@ -32,4 +32,7 @@ public class Cell extends Rectangle {
       return false;
     }
   }
+  public String info() {
+    return String.format("Cell %c%d", this.col, this.row);
+  }
 }

@@ -14,15 +14,24 @@ public class Main extends JFrame {
     class Canvas extends JPanel {
       Stage stage;
       public Canvas() {
-        setPreferredSize(new Dimension(720, 720));
-        stage = StageReader.readStage("data/stage11.rvb");
+        setPreferredSize(new Dimension(1024, 720));
+        try {
+          stage = StageReader.readStage("data/stage1.rvb");
+        } catch (IOException e) {
+          // Handle the exception or display an error message
+          System.err.println("IOException occcured on Canvas contructor");
+          System.exit(1);
+          // stage = new Stage();
+        }
       }
 
       @Override
       public void paint(Graphics g) {
         stage.paint(g, getMousePosition());
+
       }
     }
+    
 
     private Main() {
       this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
