@@ -3,12 +3,13 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Consumer;
 
-public class Grid {
+public class Grid implements Iterable<Cell> {
   Cell[][] cells = new Cell[20][20];
   
   public Grid() {
@@ -44,14 +45,20 @@ public class Grid {
   }
 
   public Optional<Cell> cellAtPoint(Point p) {
-    for(int i=0; i < cells.length; i++) {
-      for(int j=0; j < cells[i].length; j++) {
-        if(cells[i][j].contains(p)) {
-          return Optional.of(cells[i][j]);
-        }
+    for(Cell cell :this){
+      if(cell.contains(p)){
+        return Optional.of(cell);
       }
     }
+    // for(int i=0; i < cells.length; i++) {
+    //   for(int j=0; j < cells[i].length; j++) {
+    //     if(cells[i][j].contains(p)) {
+    //       return Optional.of(cells[i][j]);
+    //     }
+    //   }
+    // }
     return Optional.empty();
+
   }
 
   /**
@@ -60,10 +67,13 @@ public class Grid {
    * @param func The `Cell` to `void` function to apply at each spot.
    */
   public void doToEachCell(Consumer<Cell> func) {
-    for(int i=0; i < cells.length; i++) {
-      for(int j=0; j < cells[i].length; j++) {
-        func.accept(cells[i][j]);
-      }
+    // for(int i=0; i < cells.length; i++) {
+    //   for(int j=0; j < cells[i].length; j++) {
+    //     func.accept(cells[i][j]);
+    //   }
+    // }\
+    for(Cell c: this) {
+      func.accept(c);
     }
   }
 
@@ -89,5 +99,11 @@ public class Grid {
     for(Cell c: cells) {
       g.fillRect(c.x+2, c.y+2, c.width-4, c.height-4);
     }
+  }
+
+  @Override
+  public Iterator<Cell> iterator() {
+    // TODO Auto-generated method stub
+    return new GridIterator(cells);
   }
 }
